@@ -19,22 +19,26 @@ export default function Home() {
     const [selectedShopper, setSelectedShopper] = useState<Shopper | undefined>();
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchShoppers = async () => {
-        const res = await fetch(`./10kshopers.json`);
-        const data = await res.json();
-
-        const shoppers = data.map((shopper: Shopper) => {
-            shopper.recommendedItems = getRecommendedItems(shopper);
-            return shopper;
-        });
-        return shoppers;
-    };
-
     useEffect(() => {
-        fetchShoppers().then((data) => {
-            setShoppers(data);
+        const fetchShoppers = async () => {
+            const res = await fetch(`./10kshopers.json`);
+            const listOfShoppers = await res.json();
+
+            const shoppersWithRecommendedItems = listOfShoppers.map(
+                (shopper: Shopper) => {
+                    const shopperData = {
+                        ...shopper,
+                        recommendedItems: getRecommendedItems(listOfShoppers, shopper),
+                    };
+                    return shopperData;
+                },
+            );
+
+            setShoppers(shoppersWithRecommendedItems);
             setIsLoading(false);
-        });
+        };
+
+        fetchShoppers();
     }, []);
 
     const Row = ({ index, style }: RowProps) => {
@@ -57,7 +61,9 @@ export default function Home() {
     return (
         <>
             <h1 className="mb-4 mt-10 text-3xl font-bold">Persona</h1>
-            <span className="block h-10">{isLoading ? "loading..." : ""}</span>
+            <span className="block h-10">
+                {isLoading ? "loading..." : ""}
+            </span>
 
             <section className="flex justify-between">
                 {/* shopper list */}

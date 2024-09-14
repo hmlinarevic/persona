@@ -44,7 +44,7 @@ const getRandomItemFromSimilarShoppers = (sample: Shoppers) => {
     return randomShopperItems[getRandomNumber(0, randomShopperItems.length - 1)];
 };
 
-const getUniqueItems = (items) => {
+const getUniqueItems = (items: string[]) => {
     return Array.from(new Set(items));
 };
 

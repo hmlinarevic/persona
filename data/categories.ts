@@ -79,7 +79,7 @@ export const categories: Categories = {
         "Ethernet kabel (10m)": "electronics",
         "Televizor Telefunken": "electronics",
         jogurt: "food",
-        "RIDLEY X-BOW DISC SORA XBO01CM": "alcohol",
+        "RIDLEY X-BOW DISC SORA XBO01CM": "sport",
         Mobitel: "electronics",
     },
 };

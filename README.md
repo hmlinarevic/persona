@@ -63,7 +63,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 2. The `new-logic` branch application, which utilizes `getRecommendedItems`, the "similar behavior" pattern, and the narrowing-down system, is clearly performing much slower in the initial render. The load time is, on average, between `8 sec` and `10 sec`.
 
--   This version of the Recommendations Algorithm, `getRecommendedItems`, is generally linear with respect to the number of shoppers, utilizing array methods such as `filter`, `includes`, and `some`. This means that as the number of shoppers grows, the time it takes to run the function increases proportionally.
+-   This version of the Recommendations Algorithm, `getRecommendedItems`, is generally linear with respect to the number of shoppers, utilizing array methods such as `filter`, `includes`, and `some`. However, since it is invoked for every shopper it's time complexity is `O(n^2)`. To optimize it's running time we should consider using it in conjunction with a hash table.
 
 ## Conclusion
 
